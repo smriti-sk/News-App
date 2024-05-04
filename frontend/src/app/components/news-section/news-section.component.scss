@@ -1,0 +1,27 @@
+.topic-section{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0px 5px;
+    text-align: center;
+    max-height: 100%;
+    max-width: 100vw;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.news-article{
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    .description{
+        text-align: justify;
+    }
+    .image-sm{
+        width: calc(100%);
+        // height: calc();
+    }
+    .image-md{
+        width: calc(50%);
+        height: calc(40%);
+    }
+}

@@ -1,0 +1,13 @@
+section {
+    background-color: cadetblue;
+    text-align: center;
+}
+.topic-ribbon{
+    overflow-x: auto;
+    padding: 10px 0;
+    span {
+        padding: 10px;
+        background-color: aquamarine;
+        margin: auto;
+    }
+}
