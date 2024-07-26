@@ -1,4 +1,21 @@
 nav {
-    height: 3em;
-    background-color: aqua;
+    height: auto;
+    padding: 2px 5px;
+    h1{
+        font-size: 2em;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+    }
+    .date{
+        font-size: x-small;
+    }
+}
+@media only screen and (min-width: 600px) {
+    nav{
+        padding: 10px;
+
+        .date{
+            font-size: smaller;
+        }
+    }
 }

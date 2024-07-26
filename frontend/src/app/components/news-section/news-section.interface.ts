@@ -2,6 +2,8 @@ export interface NewsSectionInterface {
     id:string;
     cols: number;
     rows: number;
+    img_class: string;
+    grid_class: string;
     background_color: string;
     border_color: string;
 }

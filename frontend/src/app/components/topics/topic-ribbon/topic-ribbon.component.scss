@@ -1,13 +1,14 @@
-section {
-    background-color: cadetblue;
-    text-align: center;
+.topics-tab {
+  border: #33d954;
 }
-.topic-ribbon{
-    overflow-x: auto;
-    padding: 10px 0;
-    span {
-        padding: 10px;
-        background-color: aquamarine;
-        margin: auto;
-    }
+
+.tab-label{    
+    color: #383838;
+    padding: 10px 20px;
+  }
+.topics-tab .mat-tab-label.mat-tab-label-active {
+  background-color: #3367d9;
+}
+@media only screen and (min-width: 600px) {
+
 }

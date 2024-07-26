@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,6 +15,19 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
+  searchNews(searchTerm: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    // Set query parameters
+    const params = new HttpParams().set('q', searchTerm);
+
+    // Make GET request with query parameters
+    return this.http.get<any>(`${this.apiUrl}/search`, { params: params, ...httpOptions });
+  }
   getNews(requestBody: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,17 +35,5 @@ export class NewsService {
       })
     };
     return this.http.post<any>(this.apiUrl, requestBody, httpOptions);
-  }
-  SearchQueryBasedNews(searchQuery: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    // Append the searchQuery to the URL as a query parameter
-    const urlWithParams = `${this.apiUrl}/search?q=${encodeURIComponent(searchQuery)}`;
-
-    return this.http.get<any>(urlWithParams, httpOptions);
   }
 }

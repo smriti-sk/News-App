@@ -14,16 +14,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   styleUrl: './search-news.component.scss'
 })
 export class SearchNewsComponent {
-  value = 'Clear me';
-  searchQuery: string = '';
-  @Output() searchQueryEvent = new EventEmitter<string>();
+  searchTerm: string = ''; // Two-way data binding property
 
-  sendSearchQuery(searchQuery: string) {
-    console.log("event emitted");
-    
-    this.searchQueryEvent.emit(searchQuery);
+  @Output() searchSubmit: EventEmitter<string> = new EventEmitter<string>();
+
+  onSubmit(event: Event) {
+    event.preventDefault(); // Prevent form submission
+    // const encodedSearchTerm = encodeURIComponent(this.searchTerm);
+    this.searchSubmit.emit(this.searchTerm); // Emit the search term to parent component
   }
-
-  
 }
 

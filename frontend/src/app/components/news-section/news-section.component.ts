@@ -2,16 +2,16 @@ import { Component,NgZone,OnInit } from '@angular/core';
 import { NewsData, NewsSectionInterface } from './news-section.interface';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SCREENSIZE } from './news.enums';
-import { LAPTOP_GRID, MOBILE_GRID, tempData } from './news.const';
+import { LAPTOP_GRID, MOBILE_GRID } from './news.const';
 import { NewsService } from '../../services/newsSection/news.service';
 import { SearchNewsComponent } from './search-news/search-news.component';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor, NgClass, NgStyle} from '@angular/common';
 import { TopicRibbonComponent } from '../topics/topic-ribbon/topic-ribbon.component';
 
 @Component({
   selector: 'app-news-section',
   standalone: true,
-  imports: [MatGridListModule, NgIf, SearchNewsComponent, TopicRibbonComponent],
+  imports: [MatGridListModule, NgIf, SearchNewsComponent, TopicRibbonComponent, NgFor, NgClass, NgStyle],
   templateUrl: './news-section.component.html',
   styleUrl: './news-section.component.scss'
 })
@@ -22,19 +22,41 @@ export class NewsSectionComponent implements OnInit{
   private smallScreenMatch!: MediaQueryList;
   private updateScreenSize!: () => void; // Declare the function as a property to keep context
   newsSections: NewsSectionInterface[]= MOBILE_GRID;
-  newsSectionGrid: NewsSectionInterface[]= MOBILE_GRID;
   articles!: NewsData[];
   article!: NewsData;
+  selectedTab!: string;
+  
   constructor(private ngZone: NgZone, private newsService: NewsService) {}
 
   ngOnInit() {
     this.setupScreenSizeWatcher();
-    console.log("screensize: ",this.screenSize)
     this.getNews();
-    console.log("newsSections: ",this.newsSections)
-  } 
+  }
 
-  getNews() {
+  onTabSelected(tab: string) {
+    this.selectedTab = tab;
+    console.log("TAB: ",this.selectedTab);
+    
+    // Do something with the selected tab
+  }
+
+  onSearchSubmit(searchTerm: string) {
+    console.log('Search term submitted:', searchTerm);
+    this.newsService.searchNews(searchTerm).subscribe(
+      (response) => {
+        this.articles = response.results;
+        let totalArticles = response.results.length;
+        for(let i=0; i< totalArticles; i++){
+          this.article = this.articles[i];
+        }
+        
+        console.log("SEARCH NEWS:",this.articles);
+      }
+    );
+    // Implement your logic here to handle the search term from the child component
+  }
+
+  getNews(){
     const requestBody = {
       // Define your request body here
       category: 'business',
@@ -43,27 +65,13 @@ export class NewsSectionComponent implements OnInit{
     };
     this.newsService.getNews(requestBody).subscribe(
       (response) => {
+        console.log("GETNEWS")
         this.articles = response.results;
-        this.updateGridTiles(this.articles.length);
-        console.log(this.articles);
-      }
-    );
-  }
-
-  updateGridTiles(totalArticles: number) {
-    this.newsSectionGrid = [];
-    // Loop through the 'newsSection' constant till totalArticles is reached
-    for (let i = 0; i < totalArticles && i < this.newsSections.length; i++) {
-      this.newsSectionGrid.push(this.newsSections[i]);
-    }
-  }
-
-  handleSearchQuery(searchQuery: string) {
-    console.log('Value received from child:', searchQuery);
-    this.newsService.SearchQueryBasedNews(searchQuery).subscribe(
-      (response) => {
-        this.articles = response.results;
-        this.updateGridTiles(this.articles.length);
+        let totalArticles = response.results.length;
+        for(let i=0; i< totalArticles; i++){
+          this.article = this.articles[i];
+        }
+        
         console.log(this.articles);
       }
     );
@@ -89,10 +97,8 @@ export class NewsSectionComponent implements OnInit{
         console.log("Smallllll")
         this.newsSections = MOBILE_GRID;
       }else if (this.screenSize === SCREENSIZE.LARGE){
-        console.log("L")
         this.newsSections = LAPTOP_GRID;
       }else {
-        console.log("M")
         this.newsSections = LAPTOP_GRID;
       }
     };

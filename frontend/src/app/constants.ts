@@ -1,0 +1,1 @@
+export const DAY_AND_DATE_FORMAT = 'EEEE, d MMMM yyyy';

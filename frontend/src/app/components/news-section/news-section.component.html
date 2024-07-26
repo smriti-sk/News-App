@@ -1,29 +1,37 @@
-<mat-grid-list cols="4" rowHeight="100px">
-  @for (newsSection of newsSectionGrid; track newsSection; let i = $index) {
-  <mat-grid-tile [colspan]="newsSection.cols" [rowspan]="newsSection.rows"
-    [style.background]="newsSection.background_color" [style.background]="newsSection.border_color">
-    <ng-container *ngIf="i === 0">
-      <section class="topic-section">
-        <app-search-news (searchQueryEvent)="handleSearchQuery($event)"></app-search-news>
-        <app-topic-ribbon></app-topic-ribbon>
-      </section>
-    </ng-container><ng-container *ngIf="i !== 0">
+<section class="news">
+
+<ng-container>
+  <section class="topic-section">
+    <app-search-news (searchSubmit)="onSearchSubmit($event)"></app-search-news>
+    <app-topic-ribbon (tabSelectedEvent)="onTabSelected($event)"></app-topic-ribbon>
+  </section>
+</ng-container>
+
+<div class="newspage">
+  @for (newsSection of newsSections; track newsSection; let i = $index) {
       <div class="news-article">
-        <a href="{{articles[i].link}}">
-          <h2 class="font-bold">{{articles[i].title}}</h2>
-        </a>
+        <div>
+          <a href="{{articles[i].link}}">
+            <h2  class="{{newsSection.img_class}}">{{articles[i].title}}</h2>
+          </a>  
+        </div>
         <a href="{{articles[i].source_url}}">
-          <h4>{{articles[i].source_id}}</h4>
+          <span class="source-container">
+            <img src="{{articles[i].source_icon}}" alt="src">
+            <p class="source"><em><strong>Source: </strong>{{articles[i].source_id}}</em></p>
+          </span>
         </a>
-        <ng-container ngIf="newsSection.cols===1; else largeSection">
-          <img class="image-sm" src="{{articles[i].image_url}}" alt="img">
-        </ng-container>
-        <ng-template #largeSection>
-          <img class="image-md" src="{{articles[i].image_url}}" alt="img">
-        </ng-template>
-        <p class="description font-12">{{articles[i].description}}</p>
+        <div class="content">
+          <!-- <p class="{{newsSection.img_class}}"> -->
+            <div class="img-container" *ngIf="articles[i].image_url !=null"><img src="{{articles[i].image_url}}" alt="img"></div>
+            <div class="description">
+              {{articles[i].description}}
+            </div>
+          <!-- </p> -->
+        </div>
       </div>
-    </ng-container>
-  </mat-grid-tile>
+
   }
-</mat-grid-list>
+</div>
+
+</section>

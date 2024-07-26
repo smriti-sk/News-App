@@ -105,7 +105,7 @@ func GetNews(c *gin.Context) {
 	// 	selectedArticles = append(selectedArticles, selected)
 	// }
 
-	// fmt.Println("RESPONSE: ", selectedArticles)
+	fmt.Println("RESPONSE: ", originalResponse["results"])
 
 	c.JSON(http.StatusOK, gin.H{
 		// "status":       "ssseeeuccess",
@@ -155,5 +155,9 @@ func GetSearchedNews(c *gin.Context) {
 	}
 
 	// Return the parsed response to the client
-	c.JSON(http.StatusOK, responseData["results"])
+	c.JSON(http.StatusOK, gin.H{
+		// "status":       "ssseeeuccess",
+		// "totalResults": len(originalResponse), // Assuming totalResults is based on original data
+		"results": responseData["results"],
+	})
 }
