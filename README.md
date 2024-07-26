@@ -42,20 +42,15 @@ To run the News Aggregator App locally, follow these steps:
 
 2. **Navigate to the project directory:**
     ```
-    
-    Copy code
     cd news-aggregator-app
 
 3. **Install backend dependencies:**
     ```
-    
-    Copy code
     cd backend
     go mod tidy
 
 4. **Install frontend dependencies:**
     ```
-    Copy code
     cd ../frontend
     npm install
 
@@ -63,19 +58,15 @@ To run the News Aggregator App locally, follow these steps:
 
 Create a .env file in the backend directory with the following content:
     ```
-    env
-    Copy code
     NEWSAPI_KEY=your_newsdata_io_api_key
 
 6. **Run the backend server:**
     ```   
-    Copy code
     cd backend
     go run main.go
 
 7. **Run the frontend application:**
     ``` 
-    Copy code
     cd ../frontend
     npm start
 
