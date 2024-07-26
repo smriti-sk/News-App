@@ -20,7 +20,7 @@ Welcome to the News Aggregator App! This is a powerful and user-friendly web-bas
 
 ## How It Works
 
-The News Aggregator App utilizes the NEWSDATA.IO API to fetch and deliver real-time news updates. Our application is designed to be intuitive and efficient, allowing users to search for news stories with advanced filtering options. Whether you’re interested in global headlines or specific regional news, our app has you covered.
+The News Aggregator App utilizes the NEWSDATA.IO API to fetch and deliver real-time news updates. This application is designed to be intuitive and efficient, allowing users to search for news stories with advanced filtering options. Whether you’re interested in global headlines or specific regional news, this app has you covered.
 
 ## Screenshots
 
@@ -84,7 +84,7 @@ Create a .env file in the backend directory with the following content:
 Open your web browser and go to http://localhost:4200 to see the app in action.
 
 ### Contributing
-We welcome contributions to improve the News Aggregator App. If you have suggestions, bug reports, or new features in mind, please open an issue or submit a pull request.
+I warmly welcome contributions to improve the News Aggregator App. If you have suggestions, bug reports, or new features in mind, please open an issue or submit a pull request.
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for details.
